@@ -42,3 +42,19 @@ int ServerResponse::getPort() {
 std::string ServerResponse::getData() {
 	return this->data;
 }
+
+bool ServerResponse::check226() {
+	return data.find("226") != std::string::npos ? true : false;
+}
+
+void ServerResponse::printTo226() {
+	std::cout << data.substr(0, data.find("226") - 1);
+}
+
+void ServerResponse::print226() {
+	std::cout << data.substr(data.find("226"));
+}
+
+void ServerResponse::printData() {
+	std::cout << data;
+}

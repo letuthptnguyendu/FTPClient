@@ -1,7 +1,6 @@
 #pragma once
 #pragma comment(lib, "Ws2_32.lib")
 
-#include <winsock.h>
 #include "ClientRequest.h"
 #include "ServerResponse.h"
 #include "import.h"
@@ -22,7 +21,7 @@ private:
 
 public:
 	//khoi tao 1 socket ket noi toi server
-	ClientSocket(int serverPort, std::string serverIP);
+	ClientSocket(std::string serverIP, int serverPort);
 	~ClientSocket();
 
 	//khoi tao 1 socket bind 1 dia chi IP va port cu the
@@ -39,6 +38,7 @@ public:
 	void listenSock();
 	//lay port cua control socket -> tao ra port cho datasocket (che do active)
 	int getSocketPort();
+	std::string getSocketIP();
 	void connectTo(std::string svip, int svport);
 };
 

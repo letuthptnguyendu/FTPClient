@@ -1,12 +1,10 @@
 #pragma once
-#include "ClientSocket.h"
-#include "ServerResponse.h"
-#include "ClientRequest.h"
-#include "UserCmd.h"
-#include <Windows.h>
-#include <fstream>
-#include "utilities.h"
 
+#include "UserCmd.h"
+#include "utilities.h"
+#include "ClientSocket.h"
+#include "ClientRequest.h"
+#include "ServerResponse.h"
 
 class FTPClient
 {
@@ -20,6 +18,7 @@ private:
 	//passive = 1, active = 0
 	int mode;
 	int subport;
+	clock_t client_clock;
 
 	std::string serverIP;
 	int	serverPort;
@@ -31,22 +30,24 @@ private:
 
 	void pasv();
 	void actv();
-	void ls();
+	bool ls_dir();
+	void put();
 	void get();
-	void dir();
 	void mkdir();
+	void lcd();
 	void rmdir();
 	void pwd();
 	void exit();
 	void del();
-	void put();
 	void cd();
 	void mget();
 	void mput();
 	void mdelete();
-	void lcd();
-	void closeDataSocket();
+	void getFolder();
+	void delFolder();
 
+	void closeDataSocket();
+	void checkAndInitDataSocket();
 public:
 	FTPClient(std::string serverIP, int serverPort);
 	~FTPClient();
